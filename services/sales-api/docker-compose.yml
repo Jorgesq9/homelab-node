@@ -1,0 +1,21 @@
+services:
+  sales-api:
+    build: .
+    container_name: sales-api
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      - DATABASE_URL=file:/app/data/sales.db
+      - PORT=3000
+    volumes:
+      - sales-api-data:/app/data
+    networks:
+      - homelab
+
+volumes:
+  sales-api-data:
+
+networks:
+  homelab:
+    external: true

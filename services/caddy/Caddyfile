@@ -1,0 +1,17 @@
+{
+  # Cloudflare maneja SSL en el edge, Caddy solo sirve HTTP
+  auto_https off
+  admin off
+}
+
+http://jorgeesquivafullstack.es, http://localhost {
+  reverse_proxy portfolio:3000
+}
+
+http://api-reservas.jorgeesquivafullstack.es, http://reservas.jorgeesquivafullstack.es {
+  reverse_proxy booking-api:5000
+}
+
+http://api-sales.jorgeesquivafullstack.es {
+  reverse_proxy sales-api:3000
+}

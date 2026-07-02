@@ -1,0 +1,16 @@
+services:
+  portfolio:
+    build:
+      context: ${PORTFOLIO_REPO_PATH}   # ruta local donde está clonado el repo del portfolio
+    container_name: portfolio
+    restart: unless-stopped
+    expose:
+      - "3000"
+    volumes:
+      - ${NODE_INFO_JSON_PATH}:/app/node-info.json:ro   # métricas del host, generadas fuera de Docker
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    external: true

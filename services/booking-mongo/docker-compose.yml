@@ -1,0 +1,18 @@
+services:
+  booking-mongo:
+    image: mongo:7
+    container_name: booking-mongo
+    restart: unless-stopped
+    expose:
+      - "27017"
+    volumes:
+      - booking-mongo-data:/data/db
+    networks:
+      - homelab
+
+volumes:
+  booking-mongo-data:
+
+networks:
+  homelab:
+    external: true

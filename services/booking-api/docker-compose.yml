@@ -1,0 +1,32 @@
+services:
+  booking-api:
+    build: .
+    container_name: booking-api
+    restart: unless-stopped
+    expose:
+      - "5000"
+    environment:
+      - MONGO_URI=mongodb://booking-mongo:27017/reservas
+      - PORT=5000
+    depends_on:
+      - booking-mongo
+    networks:
+      - homelab
+
+  booking-mongo:
+    image: mongo:7
+    container_name: booking-mongo
+    restart: unless-stopped
+    expose:
+      - "27017"
+    volumes:
+      - booking-mongo-data:/data/db
+    networks:
+      - homelab
+
+volumes:
+  booking-mongo-data:
+
+networks:
+  homelab:
+    external: true
